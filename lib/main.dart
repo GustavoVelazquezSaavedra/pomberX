@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps/pages/request_permission_page.dart';
+import 'package:google_maps/pages/splash_page.dart';
 import 'pages/home_page.dart';
 
 void main() {
@@ -14,7 +16,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: SplashPage(),
+      routes: {
+        HomePage.routeName: (_) => HomePage(),
+        RequestPermissionPage.routeName: (_) => RequestPermissionPage(),
+      },
     );
   }
 }

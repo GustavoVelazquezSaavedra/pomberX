@@ -5,6 +5,7 @@ import 'package:google_maps/utils/map_styles.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HomePage extends StatefulWidget {
+  static const routeName = 'home-page';
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
 
   final CameraPosition _initialPosition = CameraPosition(
     target: LatLng(-25.4077991, -54.6768957),
-    zoom: 15,
+    zoom: 16,
   );
 
   @override
