@@ -11,6 +11,7 @@ class RequestPermissionPage extends StatefulWidget {
 
 class _RequestPermissionPageState extends State<RequestPermissionPage>
     with WidgetsBindingObserver {
+  bool _fromSettings = false;
   @override
   void initState() {
     super.initState();
@@ -26,7 +27,7 @@ class _RequestPermissionPageState extends State<RequestPermissionPage>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     print("AppLifecycleState:::::::: $state");
-    if (state == AppLifecycleState.resumed) {
+    if (state == AppLifecycleState.resumed && _fromSettings) {
       this._check();
     }
   }
@@ -62,7 +63,8 @@ class _RequestPermissionPageState extends State<RequestPermissionPage>
         break;
 
       case PermissionStatus.permanentlyDenied:
-        openAppSettings();
+        await openAppSettings();
+        _fromSettings = true;
         break;
     }
   }
