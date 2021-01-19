@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
 import 'package:permission_handler/permission_handler.dart';
 
 import 'home_page.dart';
@@ -44,6 +45,11 @@ class _RequestPermissionPageState extends State<RequestPermissionPage>
     Navigator.pushReplacementNamed(context, HomePage.routeName);
   }
 
+  _openAppSettings() async {
+    await openAppSettings();
+    _fromSettings = true;
+  }
+
   Future<void> _request() async {
     final PermissionStatus status =
         await Permission.locationWhenInUse.request();
@@ -57,14 +63,17 @@ class _RequestPermissionPageState extends State<RequestPermissionPage>
         break;
 
       case PermissionStatus.denied:
+        if (Platform.isIOS) {
+          this._openAppSettings();
+        }
+
         break;
 
       case PermissionStatus.restricted:
         break;
 
       case PermissionStatus.permanentlyDenied:
-        await openAppSettings();
-        _fromSettings = true;
+        this._openAppSettings();
         break;
     }
   }
